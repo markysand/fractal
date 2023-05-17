@@ -17,6 +17,6 @@ var (
 )
 
 func main() {
-	img := vFractal.CreateImage(4)
+	img := frac.VFractal.CreateImage(4)
 	frac.SaveImage("new-frac.png", img)
 }
