@@ -34,4 +34,24 @@ var (
 			}
 		},
 	}
+
+	Sierpinski = Generator{
+		UpScaler: func(pixel int8) Shape {
+			if pixel == 1 {
+				return Shape{
+					{1, 1, 1},
+					{1, 0, 1},
+					{1, 1, 1},
+				}
+			}
+
+			return *NewShape(3, 3)
+		},
+		ShapePixelToColor: func(pixel int8) color.Color {
+			if pixel == 1 {
+				return color.Gray{0}
+			}
+			return color.Gray{255}
+		},
+	}
 )
