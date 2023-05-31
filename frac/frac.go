@@ -37,7 +37,7 @@ type Generator struct {
 	ShapePixelToColor func(pixel int8) color.Color
 }
 
-func (g Generator) CreateImage(iterations int) image.Image {
+func (g Generator) CreateImage(iterations int, pixelSize int) image.Image {
 	var (
 		currentShape = g.UpScaler(InitialPixelValue)
 		nextShape    Shape
@@ -64,11 +64,19 @@ func (g Generator) CreateImage(iterations int) image.Image {
 		currentShape = nextShape
 	}
 
-	img := image.NewRGBA(image.Rect(0, 0, currentShape.DimX(), currentShape.DimY()))
+	if pixelSize == 0 {
+		pixelSize = 1
+	}
+
+	img := image.NewRGBA(image.Rect(0, 0, currentShape.DimX()*pixelSize, currentShape.DimY()*pixelSize))
 
 	for y := 0; y < currentShape.DimY(); y++ {
 		for x := 0; x < currentShape.DimY(); x++ {
-			img.Set(x, y, g.ShapePixelToColor(currentShape[y][x]))
+			for yD := 0; yD < pixelSize; yD++ {
+				for xD := 0; xD < pixelSize; xD++ {
+					img.Set(x*pixelSize+xD, y*pixelSize+yD, g.ShapePixelToColor(currentShape[y][x]))
+				}
+			}
 		}
 	}
 

@@ -30,7 +30,7 @@ var (
 			case 1, -1:
 				return color.Gray{0}
 			default:
-				return color.Gray{255}
+				return color.RGBA{100, 100, 100, 0}
 			}
 		},
 	}

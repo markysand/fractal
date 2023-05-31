@@ -85,6 +85,6 @@ var gen = frac.Generator{
 }
 
 func main() {
-	img := frac.Sierpinski.CreateImage(6)
+	img := frac.VFractal.CreateImage(2, 10)
 	frac.SaveImage("new-frac.png", img)
 }
